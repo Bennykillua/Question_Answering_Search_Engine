@@ -5,11 +5,13 @@ import DashboardNav from '../components/DashboardNav'
 import DashboardHeader from '../components/DashboardHeader'
 import { supabase } from '../utils/supabaseClient'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { useRouter } from 'next/router'
 
 const Layout = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [session, setSession] = useState(null)
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
+  const router= useRouter()
 
   useEffect(() => {
     let mounted = true
@@ -46,7 +48,8 @@ const Layout = ({ children }) => {
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut()
-    console.log('Logout Sucessfully !!')
+    console.log('Logout Sucessfully !!');
+    router.push('/')
   }
 
   return (

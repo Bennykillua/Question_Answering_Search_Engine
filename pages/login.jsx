@@ -19,7 +19,11 @@ export default function SignInPage() {
         email: userEmail,
         password: userPassword,
       })
+      alert("Check you Email and Click on the link to confirm Signup.")
+      setUserEmail("")
+      setUserPassword("")
       router.push('/dashboard')
+      
     } else {
       alert('Invalid Email and Passwrod')
     }

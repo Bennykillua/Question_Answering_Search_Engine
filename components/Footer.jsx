@@ -25,7 +25,7 @@ const Footer = () => {
           Coyright &copy; {new Date().getFullYear()}
           <span className="dark:text-gray-100 text-gray-900 font-semibold text-sm px-2">
             {' '}
-            feedbackhive.in{' '}
+            feedbackhive.online{' '}
           </span>{' '}
           All Rights Reserved
         </div>

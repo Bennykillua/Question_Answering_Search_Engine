@@ -4,8 +4,10 @@ import RectanglePatternBackground from '../components/RectanglePatternBackground
 import BrandLogo from '../components/BrandLogo';
 import { supabase } from '../utils/supabaseClient';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function SignUpPage() {
+    const router = useRouter();
 
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -16,6 +18,9 @@ export default function SignUpPage() {
             email:userEmail,
             password:userPassword
         });
+        router.push('/login')
+        setUserEmail("")
+        setUserPassword("")
     }
 
     return (

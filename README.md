@@ -10,11 +10,11 @@
 
 
 #### Dark Mode Theme
-![Poject Final View](./public/images/feed-homepage-dark.PNG)
+![Poject Final View](./public/images/feedbackhive-dark.PNG)
 
 
 #### Light Mode Theme
-![Poject Final View](./public/images/feed-homepage-light.PNG)
+![Poject Final View](./public/images/feedbackhive-light.PNG)
 
 ### Project Overview
 
@@ -55,7 +55,7 @@ and many more components...
 
 3. At starting the dashboard will have some dummy data, you can delete or save them to the positive sentiments tab.
 
-4. Now to collect new feedback, you can share this link https://feedbackhive.in/forms , which contains a product feedback/review form. 
+4. Now to collect new feedback, you can share this link https://feedbackhive.online/forms , which contains a product feedback/review form. 
 
 5. Once the user fills out the forms, the data will be saved database and also updated in the dashboard.
 
@@ -85,7 +85,19 @@ Steps to run the app locally:
  2. After that, You can see two options of adding data through files (.csv ,.xlxs) or connect a database.
  3. After you add our data, you have to create a Model and train it with your Data.
  4. Now you can query the Model you created and predict what you want.
+ 5. Also , you need to create 4 environment variables as i have also used supabase.io .
 
+ ```bash
+
+  NEXT_PUBLIC_SUPABASE_URL=''
+
+  NEXT_PUBLIC_SUPABASE_ANON_KEY=''
+
+  EMAIL=''
+
+  PASSWORD=''
+
+ ```
 
 
 #### Step-4: Connecting MidsDB to Frontend.
