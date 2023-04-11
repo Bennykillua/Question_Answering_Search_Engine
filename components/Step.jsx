@@ -1,12 +1,11 @@
+
 import React from 'react'
 
 export default function Step({ step, stepNumber, children }) {
   return (
-    <article className="flex items-center gap-[18px] mb-10">
+    <div className="flex items-center gap-[18px] mb-10">
       <button
-        className={` w-10 h-10 text-[16px] text-white dark:text-white transition-all duration-300 ease-in font-bold bg-transparent p-1 rounded-full border-4 border-gray-200 ${
-          step === stepNumber && ' border-green-400  text-gray-100 bg-gray-700'
-        }`}
+        className={` step ${step == stepNumber ? ' current-step' : ''}`}
       >
         {stepNumber}
       </button>
@@ -18,6 +17,6 @@ export default function Step({ step, stepNumber, children }) {
           {children.toUpperCase()}
         </h2>
       </div>
-    </article>
+    </div>
   )
 }
