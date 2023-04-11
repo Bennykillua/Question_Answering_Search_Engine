@@ -5,7 +5,7 @@ export default function Step({ step, stepNumber, children }) {
     <article className="flex items-center gap-[18px] mb-10">
       <button
         className={` w-10 h-10 text-[16px] text-white dark:text-white transition-all duration-300 ease-in font-bold bg-transparent p-1 rounded-full border-4 border-gray-200 ${
-          step == stepNumber && 'bg-gray-700 border-green-400  text-gray-100'
+          step == stepNumber && 'bg-gray-800 border-green-400  text-gray-100'
         }`}
       >
         {stepNumber}
