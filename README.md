@@ -1,6 +1,6 @@
 # MindsDB Hackathon (MindsDB X Hashnode) — April 2023
   
-  ![MindsDB Hackathon](./public//images/mindsdb-hashnode.png)
+  ![MindsDB Hackathon](./public/images/mindsdb-hashnode.png)
 
 ### Project Task
 
@@ -10,11 +10,11 @@
 
 
 #### Dark Mode Theme
-![Poject Final View](./public/images/feed-homepage-dark.png)
+![Poject Final View](./public/images/feed-homepage-dark.PNG)
 
 
 #### Light Mode Theme
-![Poject Final View](./public/images/feed-homepage-light.png)
+![Poject Final View](./public/images/feed-homepage-light.PNG)
 
 ### Project Overview
 
