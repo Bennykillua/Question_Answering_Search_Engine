@@ -77,9 +77,10 @@ const Layout = ({ children }) => {
               <DashboardNav handleLogout={handleLogout} />
             </div>
             <div className=" h-full lg:col-span-10 flex flex-col space-y-2 py-3 px-3  transition duration-300 ease-in bg-gray-50  dark:bg-blue-700/20 ">
-              <DashboardHeader username={currentUser} />
-
-              {children}
+             
+                <DashboardHeader username={currentUser} />
+                 
+                {children}
             </div>
           </div>
         </>

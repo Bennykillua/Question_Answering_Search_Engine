@@ -26,7 +26,15 @@ const DashboardNav = ({ handleLogout }) => {
                                     Dashboard
                                 </li>
                             </a>
-                        </Link>                
+                        </Link> 
+                        <Link href="/product-reviews">
+                            <a className={` hover:bg-blue-500/20 dark:hover:bg-blue-700/50 w-full flex items-center  space-x-1.5  decoration-none cursor-pointer font-inter transition duartion-300 ease-in  rounded-lg  px-3 py-3 text-gray-800 font-semibold ${router.pathname === '/product-reviews' ? 'bg-blue-500/30 dark:bg-blue-500/50 ' : ''}`}>
+                                <CreditCardIcon className=" w-5 h-5 md:w-5 md:h-5 text-blue-500 dark:text-blue-200 " />
+                                <li className="text-md font-urbanist font-bold text-gray-800  dark:text-gray-100">
+                                    Product Reviews
+                                </li>
+                            </a>
+                        </Link>   
                     </ul>
                 </div>
             </div>

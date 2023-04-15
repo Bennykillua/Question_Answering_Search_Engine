@@ -1,57 +1,152 @@
 import React, { useEffect, useState } from 'react'
 import Layout from './layout'
 import { supabase } from '../utils/supabaseClient'
-import ProductReviewsCard from '../components/ProductReviewsCard'
-import ProductReviewsTableHead from '../components/ProductReviewsTableHead'
+import DashboardStats from '../components/DashboardStats'
+import LoadingSpinner from '../components/LoadingSpinner'
+import { useTheme } from 'next-themes'
+
 
 const Dashboard = () => {
-  const [productReviews, setProductReviews] = useState([])
+  const { systemTheme, theme } = useTheme()
+  const currentTheme = theme === 'system' ? systemTheme : theme
+
+
+  const [totalReviews, setTotalReviews] = useState(0)
+  const [positiveReviews, setPositiveReviews] = useState(0)
+  const [negativeReviews, setNegativeReviews] = useState(0)
+  const [neutralReviews, setNeutralReviews] = useState(0)
+  const [reviewsCount, setReviewsCount] = useState([0, 0, 0])
   const [isLoading, setIsLoading] = useState(true)
+
+  const [ratingsCount,setRatingsCount] = useState([0,0,0,0,0])
+
+  const pieChartData={
+    labels: ['Positive', 'Neutral', 'Negative'],
+    datasets: [
+      {
+        label: 'Sentiment Analysis',
+        data: reviewsCount,
+        backgroundColor: ['#4ade80', '#fbbf24', '#dc2626'],
+        borderColor: `${currentTheme === 'dark' ? '#ffffff' : '#111111'}`,
+        borderWidth: 2,
+        hoverOffset: 4,
+      },
+    ],
+  }
+  
+  const doughnutChartData = {
+    labels: ['5 Star', '4 Star', '3 Star', '2 Star', '1 Star'],
+    datasets: [
+      {
+        label: 'Ratings Analysis',
+        data:ratingsCount,
+        backgroundColor: ['#818cf8', '#2563eb', '#14b8a6', '#f43f5e','#b91c1c'],
+        borderColor: `${currentTheme === 'dark' ? '#ffffff' : '#111111'}`,
+        borderWidth: 2,
+      },
+    ],
+  }
+  
 
   useEffect(() => {
     setIsLoading(true)
 
     const fetchData = async () => {
       const { data: result } = await supabase.from('sentiments').select()
-      setProductReviews(result)
+      console.log(result)
+
+      const total_reviews = result?.length
+      setTotalReviews(total_reviews)
+
+      const positive = result?.filter((item) => item.sentiment === 'positive')
+      console.log('Postive Length :', positive.length)
+      setPositiveReviews(positive.length);
+      
+      
+      const negative = result?.filter((item) => item.sentiment === 'negative')
+      // console.log("negative Length :",negative.length)
+      setNegativeReviews(negative.length)
+      
+      const neutral = result?.filter((item) => item.sentiment === 'neutral')
+      // console.log("neutral Length :",neutral.length)
+      setNeutralReviews(neutral.length)
+      
+
+      const ratings = result?.map((rating) => rating.ratings)
+      console.log("Ratings",ratings)
+
+      for (let i = 0; i < ratings.length; i++) {
+        const rating = ratings[i]
+        if (rating >= 4.1 && rating <= 5) {
+          setRatingsCount((prevCounts) => {
+            const newCounts = [...prevCounts]
+            newCounts[0]++
+            return newCounts
+          })
+        } else if (rating >= 3.1 && rating <= 4) {
+          setRatingsCount((prevCounts) => {
+            const newCounts = [...prevCounts]
+            newCounts[1]++
+            return newCounts
+          })
+        } else if (rating >= 2.1 && rating <= 3) {
+          setRatingsCount((prevCounts) => {
+            const newCounts = [...prevCounts]
+            newCounts[2]++
+            return newCounts
+          })
+        } else if (rating >= 1.1 && rating <= 2) {
+          setRatingsCount((prevCounts) => {
+            const newCounts = [...prevCounts]
+            newCounts[3]++
+            return newCounts
+          })
+        } else if (rating >= 0 && rating <= 1) {
+          setRatingsCount((prevCounts) => {
+            const newCounts = [...prevCounts]
+            newCounts[4]++
+            return newCounts
+          })
+        }
+      }
+
+   
+       
+      setReviewsCount([
+        positive.length,
+        neutral.length,
+        negative.length
+      ])
+
+      
+  
+      
     }
-
     fetchData()
-
     setIsLoading(false)
-  }, [])
+   
 
+    return () => {
+      setIsLoading(false)
+      
+    }
+   
+  }, [])
+     console.log('', ratingsCount)
   return (
     <div>
       <Layout>
-        <div className="flex ">
-          <p className="text-2xl font-bold font-manrope text-gray-900 dark:text-gray-100 py-4 px-2 ">
-            User's Reviews Sentiments Analysis
-          </p>
-        </div>
-        <div className="relative flex space-y-6 px-4  py-4 flex-col w-full h-full border-2 border-dashed rounded-lg border-gray-900 dark:border-gray-100    ">
-          <ProductReviewsTableHead />
-          {isLoading ? (
-            <div className="flex pt-10 justify-center w-full h-full">
-              <span className=" text-gray-900 dark:text-gray-100 ">
-                Loading...
-              </span>
-            </div>
-          ) : (
-            productReviews?.map((review, index) => (
-              <ProductReviewsCard
-                key={review.id}
-                index={index}
-                name={review.customer_name}
-                emailId={review.customer_email}
-                productName={review.product_name}
-                productType={review.product_type}
-                customerReviews={review.customer_reviews}
-                sentiments={review.sentiment}
-              />
-            ))
-          )}
-        </div>
+        {isLoading && <LoadingSpinner />}
+        {!isLoading && (
+          <DashboardStats
+            totalReviews={totalReviews}
+            positiveReviews={positiveReviews}
+            neutralReviews={neutralReviews}
+            negativeReviews={negativeReviews}
+            pieChartData={pieChartData}
+            doughnutChartData={doughnutChartData}
+          />
+        )}
       </Layout>
     </div>
   )

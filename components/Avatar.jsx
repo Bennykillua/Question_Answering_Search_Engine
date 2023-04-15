@@ -11,7 +11,7 @@ const avatarClasses = {
   box__extra:
     'flex items-center space-x-4 rounded-lg  ring-4 ring-blue-600  dark:ring-blue-500 py-[2px] px-2 bg-blue-300/50 dark:bg-blue-700/50',
   box__div__p1:
-    'font-inter font-bold capitalize text-md  text-blue-600 dark:text-blue-400 lowercase',
+    'font-inter font-bold capitalize text-md  text-blue-600 dark:text-blue-400 ',
 }
 
 const Avatar = ({ username }) => {

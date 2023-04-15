@@ -18,6 +18,7 @@ export default function SignUpPage() {
             email:userEmail,
             password:userPassword
         });
+        alert("Check you Email and Click on the link to Confirm Signup.")
         router.push('/login')
         setUserEmail("")
         setUserPassword("")
