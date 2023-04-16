@@ -51,8 +51,8 @@ export default function SignUpPage() {
             duration: 3000,
             style: {
               border: '2px solid black',
-              background: 'blue',
-              color: 'white',
+              background: 'white',
+              color: 'green',
               fontWeight: 'medium',
               fontSize: '14px',
               padding: '10px 20px',
