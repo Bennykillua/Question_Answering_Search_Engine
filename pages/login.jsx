@@ -6,6 +6,7 @@ import BrandLogo from '../components/BrandLogo'
 import { supabase } from '../utils/supabaseClient'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function SignInPage() {
   const router = useRouter()
@@ -19,22 +20,55 @@ export default function SignInPage() {
         email: userEmail,
         password: userPassword,
       })
-     
-      setUserEmail("")
-      setUserPassword("")
+
+      setUserEmail('')
+      setUserPassword('')
+      toast.success('Sign In Successfully !!', {
+        duration: 3000,
+        style: {
+          border: '2px solid black',
+          background: 'green',
+          color: 'white',
+          fontWeight: 'medium',
+          fontSize: '16px',
+          padding: '10px 20px',
+        },
+      })
       router.push('/dashboard')
-      
+     
+      toast.success('Welcome Back !!', {
+          duration: 3000,
+          style: {
+            border: '2px solid black',
+            background: 'white',
+            color: 'black',
+            fontWeight: 'medium',
+            fontSize: '16px',
+            padding: '10px 20px',
+          },
+      })
     } else {
-      alert('Invalid Email and Passwrod')
+      toast.error('Error Signing In, Invalid Email or Password !!', {
+        duration: 3000,
+        style: {
+          border: '2px solid black',
+          background: 'red',
+          color: 'white',
+          fontWeight: 'medium',
+          fontSize: '16px',
+          padding: '10px 20px',
+        },
+      })
     }
   }
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-white dark:bg-transparent ">
+    <div className="relative flex flex-col w-full min-h-screen bg-white dark:bg-transparent ">
       <Head>
         <title>FeedbackHive - Login</title>
         <link rel="icon" href="/images/feedbackhive-logo.png" />
       </Head>
+      <Toaster position="top-center" />
       <RectanglePatternBackground />
       <div className="absolute top-10 left-10">
         <Link href="/">

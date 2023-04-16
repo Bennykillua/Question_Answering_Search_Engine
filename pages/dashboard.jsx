@@ -4,6 +4,7 @@ import { supabase } from '../utils/supabaseClient'
 import DashboardStats from '../components/DashboardStats'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { useTheme } from 'next-themes'
+import { Toaster } from 'react-hot-toast'
 
 
 const Dashboard = () => {
@@ -58,22 +59,20 @@ const Dashboard = () => {
       const total_reviews = result?.length
       setTotalReviews(total_reviews)
 
-      const positive = result?.filter((item) => item.sentiment === 'positive')
+      const positive = result?.filter((item) => item.sentiment === 'Positive')
       console.log('Postive Length :', positive.length)
-      setPositiveReviews(positive.length);
-      
-      
-      const negative = result?.filter((item) => item.sentiment === 'negative')
+      setPositiveReviews(positive.length)
+
+      const negative = result?.filter((item) => item.sentiment === 'Negative')
       // console.log("negative Length :",negative.length)
       setNegativeReviews(negative.length)
-      
-      const neutral = result?.filter((item) => item.sentiment === 'neutral')
+
+      const neutral = result?.filter((item) => item.sentiment === 'Neutral')
       // console.log("neutral Length :",neutral.length)
       setNeutralReviews(neutral.length)
-      
 
       const ratings = result?.map((rating) => rating.ratings)
-      console.log("Ratings",ratings)
+      console.log('Ratings', ratings)
 
       for (let i = 0; i < ratings.length; i++) {
         const rating = ratings[i]
@@ -110,31 +109,19 @@ const Dashboard = () => {
         }
       }
 
-   
-       
-      setReviewsCount([
-        positive.length,
-        neutral.length,
-        negative.length
-      ])
-
-      
-  
-      
+      setReviewsCount([positive.length, neutral.length, negative.length])
     }
     fetchData()
     setIsLoading(false)
-   
 
     return () => {
       setIsLoading(false)
-      
     }
-   
   }, [])
      console.log('', ratingsCount)
   return (
-    <div>
+    <div className="relative">
+      <Toaster position="top-center" />
       <Layout>
         {isLoading && <LoadingSpinner />}
         {!isLoading && (

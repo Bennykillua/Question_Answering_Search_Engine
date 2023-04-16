@@ -5,6 +5,7 @@ import ThankYou from '../components/ThankYou'
 import { supabase } from '../utils/supabaseClient'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function FormLayout() {
   const router = useRouter()
@@ -122,7 +123,6 @@ export default function FormLayout() {
       return
     }
     handleNext()
-    console.log(formData)
     setIsFormSubmit(true)
 
     const { error } = await supabase.from('sentiments').insert({
@@ -136,10 +136,32 @@ export default function FormLayout() {
     })
 
     if (!error) {
-      console.log('Uploaded !!')
+      console.log('Uploaded !!');
+      toast.success('Form Submitted, Thank you for you feedback !!', {
+        duration: 3000,
+        style: {
+          border: '2px solid black',
+          background: 'green',
+          color: 'white',
+          fontWeight: 'medium',
+          fontSize: '16px',
+          padding: '10px 20px',
+        },
+      })
       setIsFormSubmit(true)
     } else {
-      console.log(error)
+      console.log(error);
+      toast.error('Error ,Form Not Submitted !!', {
+        duration: 3000,
+        style: {
+          border: '2px solid black',
+          background: 'red',
+          color: 'white',
+          fontWeight: 'medium',
+          fontSize: '16px',
+          padding: '10px 20px',
+        },
+      })
     }
   }
 
@@ -149,6 +171,7 @@ export default function FormLayout() {
         <title>FeedbackHive - Feedback Form</title>
         <link rel="icon" href="/images/feedbackhive-logo.png" />
       </Head>
+      <Toaster position="top-center" />
       <main className="flex space-x-4 w-[1050px] mx-auto mt-10 h-[660px] bg-white shadow-2xl rounded-xl p-6">
         <aside className="py-12 px-8 h-full w-[300px] min-w-[300px] rounded-xl  bg-no-repeat bg-hero bg-cover">
           {stepTitles.map((title, i) => {

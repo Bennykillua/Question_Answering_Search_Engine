@@ -5,10 +5,6 @@ import { supabase } from '../utils/supabaseClient'
 import MindsDB from 'mindsdb-js-sdk'
 
 const Home = () => {
-
-  
-  
-
   return (
     <div className="relative flex min-h-screen flex-col  justify-between items-center  bg-gray-100 dark:bg-gray-900 z-10 overflow-hidden custom-scroll">
       <Head>

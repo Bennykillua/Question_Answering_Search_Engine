@@ -6,6 +6,7 @@ import DashboardHeader from '../components/DashboardHeader'
 import { supabase } from '../utils/supabaseClient'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { useRouter } from 'next/router'
+import toast from 'react-hot-toast'
 
 const Layout = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -47,8 +48,20 @@ const Layout = ({ children }) => {
   }, [])
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
-    console.log('Logout Sucessfully !!');
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      toast.success('Logout Successfully !!', {
+        duration: 3000,
+        style: {
+          border: '2px solid black',
+          background: 'green',
+          color: 'white',
+          fontWeight: 'medium',
+          fontSize: '16px',
+          padding: '10px 20px',
+        },
+      })
+    }
     router.push('/')
   }
 
