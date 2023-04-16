@@ -55,7 +55,7 @@ const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.get
             {formattedDate}
           </span>
         </div>
-        <div className="flex  max-w-[550px]">
+        <div className="flex  max-w-[580px]">
           <span className="text-md font-urbanist font-semibold text-gray-800  dark:text-gray-100">
             {customerReviews}
           </span>
