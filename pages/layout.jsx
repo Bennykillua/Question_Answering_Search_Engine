@@ -54,7 +54,7 @@ const Layout = ({ children }) => {
         duration: 3000,
         style: {
           border: '2px solid black',
-          background: 'green',
+          background: 'black',
           color: 'white',
           fontWeight: 'medium',
           fontSize: '16px',

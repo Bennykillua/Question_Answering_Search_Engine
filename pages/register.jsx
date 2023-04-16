@@ -34,31 +34,21 @@ export default function SignUpPage() {
             return;
         }
 
-        toast.success('Sign Up Successfully !!', {
-          duration: 3000,
-          style: {
-            border: '2px solid black',
-            background: 'green',
-            color: 'white',
-            fontWeight: 'medium',
-            fontSize: '16px',
-            padding: '10px 20px',
-          },
-        })
-
-        toast.success('Check you Email and Click on the link to Confirm Signup. !!',
+        toast.success(
+          'Sign Up Successfully !!, Check you Email and Click on the link to Confirm Signup.',
           {
             duration: 3000,
             style: {
               border: '2px solid black',
-              background: 'white',
-              color: 'green',
+              background: 'black',
+              color: 'white',
               fontWeight: 'medium',
-              fontSize: '14px',
+              fontSize: '16px',
               padding: '10px 20px',
             },
           }
         )
+     
         router.push('/login')
         setUserEmail("")
         setUserPassword("")
